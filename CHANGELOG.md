@@ -32,6 +32,11 @@ Comprehensive transformation of the suite from a prototype utility into an indus
 - **Dedicated Forensic Disk Logging Engine (`DebugLogger`)**: Automatically initializes a persistent, timestamped log file (`BL/logs/tfast_debug_YYYYMMDD_HHMMSS.log`) on workstation launch. Captures microsecond-accurate timings, thread identifiers, raw command payloads, subprocess standard output/error buffers, and full Python tracebacks.
 - **Top Bar & Side Toolbar Debug Toggles**: Real-time synchronized switches (`DEBUG: ON` / `DEBUG: OFF`) allowing technicians to enable or pause technical disk recording at any point during a session.
 
+#### Legal & Compliance Documentation
+- **Comprehensive Terms of Use & EULA (`TERMS.md`)**: Published a complete legal framework defining the End-User License Agreement, Acceptable Use Policy (AUP), ethical servicing guidelines, Anti-Theft compliance, high-risk hardware warnings, Anti-Rollback (ARB) bricking disclaimers, NVRAM calibration protection requirements, statutory "AS IS" warranty disclaimers, and limitation of liability clauses.
+- **Dedicated License File (`LICENSE.md`)**: Structured proprietary software licensing notice with third-party open-source acknowledgments.
+- **Integrated About Modal Terms Launcher**: Added a direct "Terms of Use & EULA" action button in the desktop GUI About modal linking directly to `TERMS.md`.
+
 ---
 
 ### Fixed

@@ -3963,6 +3963,21 @@ class App(tk.Tk):
 
         btns = tk.Frame(body, bg=C.BG)
         btns.pack(fill="x", pady=(16, 0))
+
+        def _open_terms() -> None:
+            terms_file = BASE_DIR / "TERMS.md"
+            if terms_file.exists():
+                try:
+                    import os
+
+                    os.startfile(str(terms_file))
+                    self._set_status("Opened Terms of Use & EULA (TERMS.md)")
+                    return
+                except Exception:
+                    pass
+            self._open_url("https://github.com/tfastdigital")
+
+        make_button(btns, "Terms of Use & EULA", _open_terms, "subtle").pack(side="left")
         make_button(btns, "Close", win.destroy, "accent").pack(side="right")
 
         win.update_idletasks()

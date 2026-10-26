@@ -6,6 +6,8 @@
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20x64-0078d7.svg)](https://tfastdigital.com/)
 [![Runtime](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.14-green.svg)](https://python.org/)
 [![Brand](https://img.shields.io/badge/brand-TFast%20Digital-7c3aed.svg)](https://tfastdigital.com/)
+[![License](https://img.shields.io/badge/license-Proprietary%20%2F%20EULA-crimson.svg)](TERMS.md)
+[![Terms of Use](https://img.shields.io/badge/terms-Terms%20of%20Use-blueviolet.svg)](TERMS.md)
 
 > **Copyright © 2025-2026 [TFast Digital Agency](https://tfastdigital.com/). All rights reserved.**  
 > Built and maintained by TFast Digital Agency.
@@ -50,7 +52,8 @@
 7. [Operational Risks & Safety Protocols](#operational-risks--safety-protocols)
 8. [Prerequisites & Quick Start](#prerequisites--quick-start)
 9. [Attribution, Security Seal & Integrity Verification](#attribution-security-seal--integrity-verification)
-10. [License & Third-Party Notices](#license--third-party-notices)
+10. [Terms of Use, EULA & Risk Disclaimer](#terms-of-use-eula--risk-disclaimer)
+11. [License & Third-Party Notices](#license--third-party-notices)
 
 ---
 
@@ -468,9 +471,34 @@ python tools\tfast_seal.py --check
 
 ---
 
+## Terms of Use, EULA & Risk Disclaimer
+
+Use of this software is strictly conditioned upon acceptance of the comprehensive **[Terms of Use, EULA and Hardware Risk Disclaimer](TERMS.md)**. By downloading, compiling, or executing any part of this software, you agree to the following core tenets:
+
+1. **Proprietary Software License**: TFast Digital Agency grants a limited, non-exclusive, revocable license for lawful hardware diagnostics, device repair, and authorized firmware servicing.
+2. **Acceptable Use & Anti-Theft Compliance**:
+   - The tool must **ONLY** be used on devices owned by you or for which you have explicit, verifiable owner authorization to service.
+   - You may **NOT** use this software to bypass anti-theft protections, circumvent Factory Reset Protection (FRP) on unauthorized or stolen devices, or tamper with or spoof IMEI/MEID identifiers in violation of statutory telecommunications laws.
+3. **Hardware Risks & Total Assumption of Risk**:
+   - Modifying device bootloaders, flashing low-level partitions, or altering Little Kernel (LK) binaries can result in permanent device hard-bricks, bootloops, or blown hardware Anti-Rollback (ARB) eFuses.
+   - Operations may void manufacturer warranties, revoke Widevine L1 DRM certifications, and invalidate Google SafetyNet / Play Integrity hardware attestations.
+   - **Users bear sole responsibility for maintaining verified backups of NVRAM, NVDATA, and radio calibration partitions prior to flashing.**
+4. **Warranty Disclaimer**: The software is provided **"AS IS"** and **"AS AVAILABLE"**, without warranty of any kind, express or implied.
+5. **Limitation of Liability**: Under no circumstances shall TFast Digital Agency, its developers, or affiliates be liable for any direct, indirect, incidental, punitive, or consequential damages (including bricked hardware, lost profits, or data loss) resulting from the use or inability to use this software.
+
+For the full legal terms, acceptable use policies, and liability indemnification clauses, read [`TERMS.md`](TERMS.md).
+
+---
+
 ## License & Third-Party Notices
 
-This software is proprietary software developed by **TFast Digital Agency**. All rights reserved.
+This software is proprietary software developed and owned by **TFast Digital Agency**. All rights reserved.
 
-- Complete licensing terms and attribution requirements are set forth in [`tfast-NOTICE.txt`](tfast-NOTICE.txt).
-- Bundled third-party components (Android Fastboot binaries, `pyserial`, `requests`, Python runtime) remain licensed under their respective open-source licenses (Apache 2.0, BSD 3-Clause, PSF License).
+- **License Terms**: Proprietary EULA with mandatory brand attribution. See [`LICENSE.md`](LICENSE.md) and [`TERMS.md`](TERMS.md).
+- **Attribution Notice**: Complete licensing notices, copyright statements, and tamper-seal architecture details are set forth in [`tfast-NOTICE.txt`](tfast-NOTICE.txt).
+- **Third-Party Open-Source Components**:
+  - **Android Platform-Tools (`fastboot.exe`, ADB DLLs)**: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) &copy; Google LLC.
+  - **PySerial**: [BSD 3-Clause](https://github.com/pyserial/pyserial/blob/master/LICENSE.txt) &copy; Chris Liechti.
+  - **Requests / Urllib3 / Certifi**: [Apache License 2.0 / MIT / BSD](https://requests.readthedocs.io/en/latest/).
+  - **Python Runtime (CPython 3.14)**: [Python Software Foundation License](https://docs.python.org/3/license.html) &copy; Python Software Foundation.
+  - **Pillow**: [HPND License](https://github.com/python-pillow/Pillow/blob/main/LICENSE) &copy; Jeffrey A. Clark / Clark Development.
