@@ -1,0 +1,27 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary session logs (keep directory)
+logs/*.log
+!logs/.gitkeep
+
+# Temporary working outputs and extracted partitions (keep directory)
+workspace/partitions/*
+workspace/*.bin
+workspace/*.img
+!workspace/.gitkeep
+!workspace/partitions/.gitkeep
+
+# Local scratch / test files
+patch_err.txt
+*.bmp
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

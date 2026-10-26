@@ -1,0 +1,109 @@
+{
+    "server": "smarttool.top",
+    "api_endpoint": "https://smarttool.top/smarttool-api/",
+    "api_key": "ST_CLIENT_9b72b728f79beb6edca63f47a836f50bc9b2989647a3c9f3ab8a1176c82347de",
+    "timestamp": 1789207238,
+    "total_files": 20,
+    "files": {
+        "1.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "2be7ff2965ab76fe82d0d5f5bd815ed9d7e59e648d6291d853fcd0860520980e"
+        },
+        "10.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "d09b5c1b54529f540a42ad8e5786128f297ca73e706b22f5e37b19ffb7ac28c6"
+        },
+        "10a.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "fbd50c12671fe457e0b15e047c95f08dabd69873f516213a0e34ee1040f3ba18"
+        },
+        "1a.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "cf7cb6153931194ba8b0bd19d3b270ec8f8e79642d380297ecb976e52dd2a177"
+        },
+        "2.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "ba5c57ebb1614784882b50eb05b237d42badf1f809c94b2a4c7c954f73b4518f"
+        },
+        "2a.bin": {
+            "status": "Mirrored from 2.bin",
+            "size": 4194304,
+            "sha256": "ba5c57ebb1614784882b50eb05b237d42badf1f809c94b2a4c7c954f73b4518f"
+        },
+        "3.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "ba5c57ebb1614784882b50eb05b237d42badf1f809c94b2a4c7c954f73b4518f"
+        },
+        "3a.bin": {
+            "status": "Mirrored from 3.bin",
+            "size": 4194304,
+            "sha256": "ba5c57ebb1614784882b50eb05b237d42badf1f809c94b2a4c7c954f73b4518f"
+        },
+        "4.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "1a6de80a71bbf80d4bf38478a7f6b26bb443d48892c8c01aa5280e12b6d49899"
+        },
+        "4a.bin": {
+            "status": "Mirrored from 4.bin",
+            "size": 4194304,
+            "sha256": "1a6de80a71bbf80d4bf38478a7f6b26bb443d48892c8c01aa5280e12b6d49899"
+        },
+        "5.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "467f4562abcde49fd0b0546b810e325e01592e56624bc636431ad3f4b0aa63f5"
+        },
+        "5a.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "a7bc5e4a900dba66c7d72e46585f04074f5932c4fa9bad22e0e23f7442bee049"
+        },
+        "6.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "467f4562abcde49fd0b0546b810e325e01592e56624bc636431ad3f4b0aa63f5"
+        },
+        "6a.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "a7bc5e4a900dba66c7d72e46585f04074f5932c4fa9bad22e0e23f7442bee049"
+        },
+        "7.bin": {
+            "status": "Downloaded",
+            "size": 2097152,
+            "sha256": "ce7c2c37482f506ca7922ac170775ed69564a101d1dac8744a46a1cf6197a55a"
+        },
+        "7a.bin": {
+            "status": "Downloaded",
+            "size": 2097152,
+            "sha256": "ea6c9dbeb4cc849859c2965099f64adfab038a76c354ca496814ac939a1e149b"
+        },
+        "8.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "e6818efc0e549e457fb4ceb6749db7539831a86fe31caf6e93acbdf731ccb7a0"
+        },
+        "8a.bin": {
+            "status": "Mirrored from 8.bin",
+            "size": 4194304,
+            "sha256": "e6818efc0e549e457fb4ceb6749db7539831a86fe31caf6e93acbdf731ccb7a0"
+        },
+        "9.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "02fdcf6aa44e01c2baa338aaf2ff330b4ce9e348c19b0e33e4e4a1c4b7ddd397"
+        },
+        "9a.bin": {
+            "status": "Downloaded",
+            "size": 4194304,
+            "sha256": "006df2573aa98119240cd4d7ee8d673e8e9f9bf22d61c245483010e09359291d"
+        }
+    }
+}

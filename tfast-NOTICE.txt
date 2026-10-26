@@ -1,0 +1,113 @@
+================================================================================
+TFast MTK Bootloader Tool
+================================================================================
+
+Product     : TFast MTK Bootloader Tool (CLI Edition / Desktop Edition)
+Version     : 2.0.0
+Brand ID    : tfast-digital
+Copyright   : (c) 2025-2026 TFast Digital Agency. All rights reserved.
+Developed by: TFast Digital Agency
+
+  Website  : https://tfastdigital.com/
+  GitHub   : https://github.com/tfastdigital
+  Telegram : https://t.me/tfasthub
+  WhatsApp : https://whatsapp.com/channel/0029VaAYznPK5cDIXJa9nW1a
+
+--------------------------------------------------------------------------------
+PROPRIETARY SOFTWARE - ATTRIBUTION IS MANDATORY
+--------------------------------------------------------------------------------
+
+This software and its accompanying files, binaries and documentation are the
+property of TFast Digital Agency.
+
+1. The copyright notice and attribution must remain intact in every copy,
+   fork, modification and redistribution of this software, in both source and
+   compiled form.
+
+2. The brand data lives in the dedicated module bl_core/tfast_brand.py. The
+   enforcement engine is bl_core/tfast_guard.py. The signed manifest is
+   tfast-brand.json.
+
+3. Removing, obscuring or replacing the TFast Digital branding to present this
+   work as your own is a breach of these terms and of applicable copyright law.
+
+4. No warranty. This tool modifies device bootloaders, which can permanently
+   damage hardware. Use entirely at your own risk. TFast Digital Agency
+   accepts no liability for bricked devices, voided warranties or lost data.
+
+--------------------------------------------------------------------------------
+HOW THE INTEGRITY CHECK WORKS
+--------------------------------------------------------------------------------
+
+The application verifies its branding at startup and then periodically while
+the desktop app is running. Six layers are checked:
+
+  1. In-memory constants  - the attribution is re-derived from primitives and
+                            compared against the canonical string and its
+                            SHA-256 seal.
+  2. On-disk manifest     - tfast-brand.json records the SHA-256 of every
+                            protected file.
+  3. Manifest self-seal   - the manifest carries its own seal over its body, so
+                            editing the recorded hashes is caught too.
+  4. Source watermark     - bl.py and gui.py must still contain the
+                            "@brand tfast-digital" marker.
+  5. Import-hijack check  - the loaded brand module must be the real file on
+                            disk, not a stub injected into sys.modules.
+  6. Copyright notice     - tfast-NOTICE.txt must still name TFast Digital
+                            Agency.
+
+If any check fails, the application refuses to start (exit code 3) and names
+the failing file. That refusal is intentional and is not a defect.
+
+Protected by hash:
+    bl_core/tfast_brand.py
+    bl_core/branding.py        (compatibility shim)
+    bl_core/tfast_guard.py
+    tfast-NOTICE.txt
+    assets/tfast.ico
+
+Checked by watermark:
+    bl.py
+    gui.py
+
+RE-SEALING AFTER A LEGITIMATE CHANGE
+------------------------------------
+If you intentionally change a protected file (for example to update the
+copyright year), re-seal the build so the check accepts your change:
+
+    python tools/tfast_seal.py
+
+    python tools/tfast_seal.py --check   # verify only
+    python tools/tfast_seal.py --list    # show what is covered
+
+HONEST LIMITATION
+-----------------
+This scheme is tamper-evident, not cryptographically unremovable. Anyone with
+the source and enough determination can recompute the seal. What it guarantees
+is that an accidental or casual removal fails loudly and names the file,
+instead of silently shipping an unattributed copy. It is not a substitute for a
+written licence agreement between you and TFast Digital Agency.
+
+--------------------------------------------------------------------------------
+THIRD-PARTY COMPONENTS
+--------------------------------------------------------------------------------
+
+  fastboot.exe, AdbWinApi.dll, AdbWinUsbApi.dll, libwinpthread-1.dll
+      Android platform-tools (Apache License 2.0, Google LLC)
+
+  requests, urllib3, idna, certifi, charset_normalizer
+      Python HTTP libraries (Apache 2.0 / MIT / BSD)
+
+  pyserial
+      Python serial port access (BSD 3-Clause)
+
+  Pillow
+      Image library, if present (MIT-CMU)
+
+  Python 3.14 runtime (py314_runtime)
+      Python Software Foundation License
+
+All third-party components remain under their respective licences. This
+notice does not alter those terms.
+
+================================================================================

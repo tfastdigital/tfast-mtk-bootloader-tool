@@ -1,0 +1,15 @@
+{
+  "algorithm": "sha256",
+  "brand_id": "tfast-digital",
+  "files": {
+    "assets/tfast.ico": "6bb0571736540ad1a96492660a20e4cfec7c779701c84cb20e1559684333faac",
+    "bl_core/branding.py": "450c7da1012a5b4af4d466b3c0632eb2d671356b7df17d1371461e139426e65c",
+    "bl_core/tfast_brand.py": "cdb9185ecbc8b18c137d44cd9b767c85bae1caed6c35d9e981e5a030033cca5e",
+    "bl_core/tfast_guard.py": "3d7c561c7bedfe1ad86463c84326f6dd2736d93a223d7d8badb018c6a33ed333",
+    "tfast-NOTICE.txt": "567bdf52c303024a1448d693730e998f19095634ca036e0845410d0c6e85c70e"
+  },
+  "product": "TFast MTK Bootloader Tool",
+  "schema": 1,
+  "seal": "f8cbfcf5845506d50eef810a56c2fcc88bd217d477b807bf442bd406a691bab6",
+  "version": "2.0.0"
+}

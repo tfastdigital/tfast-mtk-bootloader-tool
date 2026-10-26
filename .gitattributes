@@ -1,0 +1,19 @@
+# Auto detect text files and normalize to LF in repository
+* text=auto
+
+# Binary files - do not touch
+*.bin binary
+*.pyd binary
+*.dll binary
+*.exe binary
+*.ico binary
+*.png binary
+*.zip binary
+*.pyc binary
+
+# Sealed integrity files - exact byte preservation across platforms
+bl_core/tfast_brand.py -text
+bl_core/branding.py -text
+bl_core/tfast_guard.py -text
+tfast-NOTICE.txt -text
+tfast-brand.json -text
