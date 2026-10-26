@@ -22,12 +22,18 @@
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
-2. [How It Works (Under the Hood)](#how-it-works-under-the-hood)
+2. [Recent Updates & Changelog](#recent-updates--changelog)
+3. [End-to-End Servicing Workflows](#end-to-end-servicing-workflows)
+   - [Workflow A: Guided Unlock Pipeline (Fastboot)](#workflow-a-the-recommended-guided-unlock-pipeline-fastboot)
+   - [Workflow B: Hardware Recovery Pipeline (META Mode)](#workflow-b-the-hard-brick--locked-fastboot-recovery-pipeline-meta-mode)
+   - [Workflow C: Partition Forensics & Backup (META Shell)](#workflow-c-partition-forensics-backup--wiping-meta-shell)
+   - [Workflow D: Little Kernel (LK) Binary Patching](#workflow-d-little-kernel-lk-disassembly--4-byte-patching)
+4. [How It Works (Under the Hood)](#how-it-works-under-the-hood)
    - [Fastboot Core Pipeline & FENIX Handshake](#1-fastboot-core-pipeline--fenix-handshake)
    - [Little Kernel (LK) 4-Byte Binary Patcher](#2-little-kernel-lk-4-byte-binary-patcher)
    - [Transsion Anti-Tamper Guard Neutralization](#3-transsion-anti-tamper-guard-neutralization)
    - [MediaTek Preloader / BootROM META Protocol](#4-mediatek-preloader--bootrom-meta-protocol)
-3. [Comprehensive GUI Reference & Button Guide](#comprehensive-gui-reference--button-guide)
+5. [Comprehensive GUI Reference & Button Guide](#comprehensive-gui-reference--button-guide)
    - [Top Navigation Chrome & Activity Console Toolbar](#top-navigation-chrome--activity-console-toolbar)
    - [Page 1: Guided Unlock Wizard](#page-1-guided-unlock-wizard)
    - [Page 2: Hardware Dashboard](#page-2-hardware-dashboard)
@@ -40,9 +46,108 @@
    - [Page 9: Hardware META Mode Unlock](#page-9-hardware-meta-mode-unlock)
    - [Page 10: Patch Bundle Builder](#page-10-patch-bundle-builder)
    - [Page 11: Supported Models Catalog](#page-11-supported-models-catalog)
-4. [Command-Line Interface (CLI) Reference](#command-line-interface-cli-reference)
-5. [Operational Risks & Safety Protocols](#operational-risks--safety-protocols)
-6. [Prerequisites & Quick Start](#prerequisites--quick-start)
+6. [Command-Line Interface (CLI) Reference](#command-line-interface-cli-reference)
+7. [Operational Risks & Safety Protocols](#operational-risks--safety-protocols)
+8. [Prerequisites & Quick Start](#prerequisites--quick-start)
+9. [Attribution, Security Seal & Integrity Verification](#attribution-security-seal--integrity-verification)
+10. [License & Third-Party Notices](#license--third-party-notices)
+
+---
+
+## Recent Updates & Changelog
+
+See [`CHANGELOG.md`](CHANGELOG.md) for the full version history and detailed release notes. Key highlights in **v2.0.0**:
+
+- **Streamlined Professional UI**: Stripped all toy emojis and removed the cluttered sidebar footer to create an uncluttered, high-contrast engineering workstation.
+- **Architectural UI/Disk Log Separation**: The on-screen Activity Log panel now presents clean, high-level operational milestones, while full forensic telemetry (raw command buffers, microsecond timings, thread IDs, and exit codes) is recorded exclusively to persistent disk log files in `BL/logs/`.
+- **Silenced Idle Background Polling**: Periodic keep-alive device polling (`fastboot devices`) no longer spams the visual log console while the workstation is idle.
+- **Native Windows Title Bar & Taskbar Icons**: Restored crisp Win32 `WM_SETICON` rendering and explicit `AppUserModelID` registration, eliminating the Tkinter feather fallback icon.
+- **One-Click Fastboot-to-META Reboot**: Added `Reboot to META (Fastboot)` to reboot fastboot devices straight into BootROM/Preloader META mode without manual hardware button timing.
+- **Resilient META Handshake**: Implemented a 30-second listening window, COM port dropdown selector, automated partition table loading, and graceful warning notices replacing raw Python stack traces.
+
+---
+
+## End-to-End Servicing Workflows
+
+### Workflow A: The Recommended Guided Unlock Pipeline (Fastboot)
+Use this workflow for standard servicing, rooting, and bootloader unlocks on supported MediaTek and Transsion devices:
+
+```mermaid
+flowchart TD
+    A["1. Connect Phone in Fastboot"] --> B["Probe Device (F5)"]
+    B --> C["2. Select Target Model in Catalog"]
+    C --> D["3. Execute Unlock Pipeline"]
+    D --> E{"Keep Fastboot Mode?"}
+    E -- Yes --> F["4. Wipe Guard Partitions"]
+    E -- No --> G["Phone reboots normally"]
+    F --> H["5. Final Reboot to System"]
+```
+
+1. **Pre-Flight**: Power the device off, hold **Volume Down**, and connect the USB cable until the Fastboot screen appears. Click **Scan (F5)** or **Probe Device (F5)** to verify communication.
+2. **Model Selection**: Enter the model name (e.g., `Spark 40 Pro` or `KM6`) in the filter box on the Guided Wizard. The tool matches verified Little Kernel stages and sets up the unlock payload.
+3. **Automated Unlock**: Ensure `Keep device in fastboot mode after unlock` is checked, then click **Execute Unlock Pipeline**. The tool zeroes FRP flags, flashes pre-patched LK stages to the active slot, and executes the FENIX unlock handshake.
+4. **OEM Guard Wipe**: Transition immediately to Stage 4 and click **Wipe Guard Partitions**. This neutralizes `tr_product`, `tr_vendor`, and `tr_system` overlays to prevent red-state bootloops.
+5. **System Boot**: Click **Normal Reboot (System)**. The handset boots with an unlocked bootloader ready for Magisk/KernelSU or custom recovery.
+
+---
+
+### Workflow B: The Hard-Brick / Locked Fastboot Recovery Pipeline (META Mode)
+Use this workflow when the device's Fastboot interface is blocked by strict OEM security policies, or when fastboot commands return `remote: not allowed in locked state`:
+
+```mermaid
+flowchart TD
+    A["Device Fastboot Locked / Write Blocked"] --> B["Click 'Reboot to META (Fastboot)' OR Connect manually"]
+    B --> C["Establish META Serial Session (COMx)"]
+    C --> D["Execute Hardware META Unlock (Clear seccfg)"]
+    D --> E["Bootloader Lock Fuses Flipped in NVRAM"]
+    E --> F["Reboot to Fastboot -> Ready for Flashing"]
+```
+
+1. **Session Initiation**:
+   - *If already in Fastboot*: Click **Reboot to META (Fastboot)** in the META Partition Manager.
+   - *If powered off*: Select **Auto-detect**, click **Connect META Port**, then hold **Volume Down** and connect USB.
+2. **Handshake Verification**: The tool listens for the MediaTek Preloader / VCOM port (`VID 0x0E8D`) within a 30-second window and establishes the serial protocol shell.
+3. **Hardware Unlock**: Switch to **Hardware META Unlock** and click **Execute Hardware META Unlock**. The tool clears `seccfg` in NVRAM storage over the serial link.
+4. **Fastboot Re-entry**: The phone reboots with hardware lock restrictions completely neutralized at the silicon level.
+
+---
+
+### Workflow C: Partition Forensics, Backup & Wiping (META Shell)
+Use this workflow for forensic extractions, backup verification, and custom partition flashing:
+
+```mermaid
+flowchart TD
+    A["Active META Session"] --> B["Filter Partition Tree"]
+    B --> C{"Choose Operation"}
+    C --> D["Back up / Export (dd -> Base64)"]
+    C --> E["Restore / Replace (Verify SHA-256)"]
+    C --> F["Wipe (Zero-Fill & Header Probe)"]
+```
+
+1. **Connect & Enumerate**: Establish a session via **Connect META Port**. The tool automatically queries the partition layout from `/proc/dumchar_info` and populates the Partition Explorer.
+2. **Filter & Select**: Use the quick filter presets (`Critical`, `Guards`, `Safe`, `All`) or type a name (`boot`, `nvram`, `vbmeta`).
+3. **Execute Operation**:
+   - To dump: Click **Back up** or select multiple and click **Export**.
+   - To restore: Select the image and click **Restore**. The engine verifies the file size and read-back hash.
+   - To wipe: Click **Wipe**. The tool probes the filesystem header, zeroes the blocks, and verifies removal.
+
+---
+
+### Workflow D: Little Kernel (LK) Disassembly & 4-Byte Patching
+Use this workflow to reverse engineer and patch raw Little Kernel binaries extracted from new or unlisted firmware builds:
+
+```mermaid
+flowchart TD
+    A["Load Stock LK Binary (lk.bin)"] --> B["Analyze LK Binary (ARM32 / AArch64)"]
+    B --> C["Dry Run LK Patch (Check Offsets & NOPs)"]
+    C --> D["Patch LK In Place (.bak created)"]
+    D --> E["Ready to Flash via Fastboot"]
+```
+
+1. **Load Binary**: Browse to a stock `lk.bin` or `lk_a.bin` on the **LK Patch & Analysis** page.
+2. **Forensic Analysis**: Click **Analyze LK Binary**. The engine disassembles the image and locates branch instructions controlling fastboot locks.
+3. **Simulation**: Click **Dry Run LK Patch**. The tool simulates the 4-byte NOP replacement and confirms target offsets.
+4. **Apply Patch**: Click **Patch LK In Place**. The binary is patched on disk with an automated `.bak` backup, ready for deployment.
 7. [Attribution, Security Seal & Integrity Verification](#attribution-security-seal--integrity-verification)
 8. [License & Third-Party Notices](#license--third-party-notices)
 
